@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import App from '../App';
 
-function CartRender () {
-    const [cartDisplay, setCartDisplay] = useState([]);
 
-    const addToCart = (product) => {
-        setCartDisplay([...cartDisplay, product]);
-    };
+function CartRender ({cartDisplay, setCartDisplay}) {
+    
+
+    
 
     return (
         <div>
-            <App />
+            <li>
+            <p>{cartDisplay}</p>
+            </li>
+          
         </div>
     );
 

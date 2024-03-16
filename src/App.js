@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import Cart from './components/Cart';
 import axios from 'axios';
-
+import ProductDisplay from './components/Product';
+import CartRender from './components/Cart';
 
 function App() {
   const [products, setProducts] = useState([]);
+  const [cartDisplay, setCartDisplay] = useState([]);
   
-    
+
+  const addToCart = (title) => {
+    setCartDisplay([...cartDisplay, title]);
+  };
 
     useEffect(function fetchProducts() {
         axios.get('https://fakestoreapi.com/products')
@@ -19,19 +23,28 @@ function App() {
   }, []);
            
    return (<div>
-       <Cart/>
+    <ul>
+       <h3>CART</h3>
+       
+            
+            <CartRender 
+            cartDisplay = {cartDisplay}
+            setCartDisplay = {setCartDisplay} 
+            />
+          
+      </ul>   
         <ul>
+          <h3>ITEMS</h3>
           {products.map((item) => (
-            <li>
-              <h3>{item.title}</h3>
-              <p>{item.description}</p>
-              <p>{item.price}</p>    
-              <label htmlFor="quantity">Select a quantity:</label>
-              <input type="number" min="1" max="99" step="1"/>
-              <button onClick={() => addToCart(item)}>Add To Cart</button>
-
-
-            </li>
+            
+            <ProductDisplay 
+               key = {item.id}
+               title = {item.title}
+               description = {item.description}
+               price = {item.price}
+               addToCart={addToCart}
+            />
+          
           ))}      
       </ul>
 </div>
