@@ -6,18 +6,46 @@ import CartRender from './components/Cart';
 function App() {
   const [products, setProducts] = useState([]);
   const [cartDisplay, setCartDisplay] = useState([]);
-  console.log(products)
+  const [total, setTotal] = useState(0);
 
-  const addToCart = (quantity, itemId) => {
-    if (cartDisplay.find((item) => item.itemId === itemId) !== undefined) {
+ 
+
+  useEffect(() => {
+
+    function calcTotal() {
+      setTotal(prevState => {
+        let totalPrice = 0;
+        for (let item of cartDisplay) {
+          totalPrice += item.price * item.count;
+        }
+        return totalPrice;
+      });
+    }
+    
+
+    calcTotal();
+  },[cartDisplay])
+
+  const removeFromCart = (id) => {
+    setCartDisplay((prevState) => prevState.filter((item) => item.id !== id));
+    
+      
+ };
+  
+
+
+  const addToCart = (quantity, id, title, description, price) => {
+    
+    if (cartDisplay.find((item) => item.id === id) !== undefined) {
       setCartDisplay((prevState) =>
         prevState.map((item) =>
-          item.itemId === itemId ? { ...item, count: Number(quantity) } : item
+          item.id === id ? { ...item, count: Number(quantity) } : item
         )
       );
     } else {
-      setCartDisplay((prevItems) => [...prevItems, { itemId, count: Number(quantity)}]);
+      setCartDisplay((prevItems) => [...prevItems, {title, description, price, id, count: Number(quantity)}]);
     }
+
     return;
   };
 
@@ -33,14 +61,21 @@ function App() {
            
    return (<div>
     <ul>
+    <h3>Total: ${total}</h3>
        <h3>CART</h3>
        
-            
+       {cartDisplay.map((item) => (
             <CartRender 
-            cartDisplay = {cartDisplay}
-            setCartDisplay = {setCartDisplay} 
+               removeFromCart = {removeFromCart}
+               key = {item.id}
+               title = {item.title}
+               description = {item.description}
+               price = {item.price}
+               count = {item.count}
+               id = {item.id}
+              
             />
-          
+            ))}
       </ul>   
         <ul>
           <h3>ITEMS</h3>
@@ -48,7 +83,7 @@ function App() {
             
             <ProductDisplay 
                key = {item.id}
-               itemId = {item.id}
+               id = {item.id}
                title = {item.title}
                description = {item.description}
                price = {item.price}

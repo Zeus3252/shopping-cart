@@ -1,17 +1,26 @@
 import React, { useState, useEffect } from 'react'
 
 
-function CartRender ({cartDisplay, setCartDisplay}) {
+function CartRender ({title, price, description, count, removeFromCart, id, total}) {
     
-
+   
+    
     
 
     return (
         <div>
-            <li>
-            <p>{cartDisplay}</p>
+            
+           <li>
+              <h3>{title}</h3>
+              <p>{description}</p>
+
+              <p>Price: ${price}</p> 
+              <p>Quantity:</p>   
+              <p>{count}</p>
+              
+              <button onClick={() => removeFromCart(id)}>Remove all</button> 
             </li>
-          
+            
         </div>
     );
 
