@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 
-function ProductDisplay({title, description, price, addToCart, newItem}) {
-    const [input, setInput] = useState("")
+function ProductDisplay({title, description, price, addToCart, itemId}) {
+    
+    const [quantity, setQuantity] = useState("")
     
     return (
         <div>
@@ -10,9 +11,9 @@ function ProductDisplay({title, description, price, addToCart, newItem}) {
               <p>{description}</p>
               <p>{price}</p>    
               <label htmlFor="quantity">Select a quantity:</label>
-              <input type="number" min="1" max="99" step="1" onChange={(e) => setInput(e.target.value)} value = {input}/> 
-              {console.log(title)} 
-              <button onClick={() => addToCart(title)}>Add To Cart</button> 
+              <input type="number" min="1" max="99" step="1" onChange={(e) => setQuantity(e.target.value)} value = {quantity}/> 
+               
+              <button onClick={() => addToCart(quantity, itemId)}>Add To Cart</button> 
 
 
             </li>

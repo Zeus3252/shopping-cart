@@ -6,10 +6,19 @@ import CartRender from './components/Cart';
 function App() {
   const [products, setProducts] = useState([]);
   const [cartDisplay, setCartDisplay] = useState([]);
-  
+  console.log(products)
 
-  const addToCart = (title) => {
-    setCartDisplay([...cartDisplay, title]);
+  const addToCart = (quantity, itemId) => {
+    if (cartDisplay.find((item) => item.itemId === itemId) !== undefined) {
+      setCartDisplay((prevState) =>
+        prevState.map((item) =>
+          item.itemId === itemId ? { ...item, count: Number(quantity) } : item
+        )
+      );
+    } else {
+      setCartDisplay((prevItems) => [...prevItems, { itemId, count: Number(quantity)}]);
+    }
+    return;
   };
 
     useEffect(function fetchProducts() {
@@ -39,6 +48,7 @@ function App() {
             
             <ProductDisplay 
                key = {item.id}
+               itemId = {item.id}
                title = {item.title}
                description = {item.description}
                price = {item.price}
