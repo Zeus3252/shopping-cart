@@ -26,7 +26,7 @@ function CartRender({ cartItems, removeFromCart, totalPrice, image }) {
                     ))}
                 </div>
                 <br/>
-                <br/>
+                
             </div>
         </>
     )
