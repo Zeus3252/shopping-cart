@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+
+.productsDisplay {
+  display: flex;
+  
+  flex-wrap: wrap;
+  gap: 100px; 
+  justify-content: center;
+}

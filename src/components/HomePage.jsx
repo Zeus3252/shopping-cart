@@ -4,7 +4,10 @@ function HomePage ({ productItems, addToCart }) {
 
 	return (
 	<div>
-		<h3 className="itemLabel">Items</h3>
+		<br/>
+		<h3 className="bg-gradient-to-r from-blue-500 to-blue-700 text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text leading-none  itemLabel text-center">Items</h3>
+		<br/>
+		<br/>
 		<div className="productsDisplay">
 		{productItems && productItems.map((item) => (
 			

@@ -3,7 +3,7 @@ import HomePage from './components/HomePage';
 import CartRender from "./components/Cart"
 import { Routes, Route } from "react-router-dom";
 import NavBar from './components/NavBar';
-import './App.css';
+import './tailwind.css';
 
 function App() {
   const [products, setProducts] = useState([]);

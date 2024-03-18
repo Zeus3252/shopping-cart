@@ -1,26 +1,23 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 
-function ProductDisplay({title, description, price, addToCart, id, count, image}) {
-    
-    const [quantity, setQuantity] = useState("")
-    
+function ProductDisplay({ title, description, price, addToCart, id, count, image }) {
+    const [quantity, setQuantity] = useState("");
+
     return (
-        <div className='productContainer'>
-           
-              <h3>{title}</h3>
-              <p>{description}</p>
-              <img className='productImage' src={image} alt={title}/>
-              <p>Price: ${price}</p>    
-              <label htmlFor="quantity">Select a quantity:</label>
-              <input type="number" min="1" max="99" step="1" onChange={(e) => setQuantity(e.target.value)} value = {quantity}/> 
-               
-              <button onClick={() => {setQuantity(''); addToCart(quantity, id, title, description, price, image, count)}}>Add To Cart</button> 
-
-
-            
-        </div>
+        <div className='flex flex-col rounded overflow-hidden shadow-lg p-4 bg-white' style={{ height: '600px', width: '400px' }}>
+            <div className="flex-grow">
+                <h3 className='text-xl font-bold mb-2'>{title}</h3>
+                <div className="flex justify-center mb-4" style={{ height: '250px', width: '100%' }}>
+                    <img className="object-contain h-full" src={image} alt={title} />
+                </div>
+                <p className='text-gray-900 font-semibold'>Price: ${price}</p>
+                <div className="mt-4">
+                    <label htmlFor="quantity" className="block text-gray-700 text-sm font-bold mb-2">Select a quantity:</label>
+                    <input type="number" id="quantity" min="1" max="99" step="1" className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" onChange={(e) => setQuantity(e.target.value)} value={quantity} />
+                </div>
+            </div>
+            <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4 self-end' onClick={() => {setQuantity(''); addToCart(quantity, id, title, description, price, image, count)}}>Add To Cart</button>         </div>
     );
-
 }
 
 export default ProductDisplay;
