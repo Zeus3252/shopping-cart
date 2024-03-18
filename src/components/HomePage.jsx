@@ -3,8 +3,9 @@ import ProductDisplay from "./Product";
 function HomePage ({ productItems, addToCart }) {
 
 	return (
-	<ul>
-		<h3>ITEMS</h3>
+	<div>
+		<h3 className="itemLabel">Items</h3>
+		<div className="productsDisplay">
 		{productItems && productItems.map((item) => (
 			
 			<ProductDisplay 
@@ -18,7 +19,7 @@ function HomePage ({ productItems, addToCart }) {
 			/>
 		
 		))}      
-</ul>
+</div></div>
 );
 }
 

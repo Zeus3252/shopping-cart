@@ -6,7 +6,7 @@ function ProductDisplay({title, description, price, addToCart, id, count, image}
     
     return (
         <div className='productContainer'>
-           <li>
+           
               <h3>{title}</h3>
               <p>{description}</p>
               <img className='productImage' src={image} alt={title}/>
@@ -14,10 +14,10 @@ function ProductDisplay({title, description, price, addToCart, id, count, image}
               <label htmlFor="quantity">Select a quantity:</label>
               <input type="number" min="1" max="99" step="1" onChange={(e) => setQuantity(e.target.value)} value = {quantity}/> 
                
-              <button onClick={() => addToCart(quantity, id, title, description, price, image, count)}>Add To Cart</button> 
+              <button onClick={() => {setQuantity(''); addToCart(quantity, id, title, description, price, image, count)}}>Add To Cart</button> 
 
 
-            </li>
+            
         </div>
     );
 

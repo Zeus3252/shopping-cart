@@ -1,18 +1,42 @@
 .cartLabel {
-  color: red
+  color: red;
+  margin:200px;
+  font-size: 30px;
+}
+
+.homeLabel {
+  float: right;
+  margin-right: 200px;
+  font-size: 30px;
+}
+
+.itemLabel {
+  text-align: center;
+  font-size: 40px;
+  text-decoration: underline;
+}
+
+.header {
+  color: blue;
 }
 
 .productContainer {
-  display: flex;
-  flex-direction: row; /* Default value: aligns items horizontally */
+  width: calc(20% - 10px); 
+  margin: 50px; 
   
-  align-items: center; /* Aligns items vertically in the center */
-  flex-wrap: wrap;
 }
 
 .productImage {
   
-    width: 100px; 
+    width: 170px; 
     height: auto; 
-  
+    
+}
+
+.productsDisplay {
+  display: flex;
+  text-align: center;
+  flex-wrap: wrap;
+  gap: 20px; 
+  justify-content: center;
 }
