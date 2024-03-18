@@ -3,17 +3,19 @@ import HomePage from './components/HomePage';
 import CartRender from "./components/Cart"
 import { Routes, Route } from "react-router-dom";
 import NavBar from './components/NavBar';
+import './App.css';
 
 function App() {
   const [products, setProducts] = useState([]);
   const [cartDisplay, setCartDisplay] = useState([]);
   const [total, setTotal] = useState(0);
+  const [cartCount, setCartCount] = useState(0);
 
   const removeFromCart = (id) => {
     setCartDisplay((prevState) => prevState.filter((item) => item.id !== id));    
   };
   
-  const addToCart = (quantity, id, title, description, price) => {
+  const addToCart = (quantity, id, title, description, price, image) => {
     
     if (cartDisplay.find((item) => item.id === id) !== undefined) {
       setCartDisplay((prevState) =>
@@ -22,7 +24,7 @@ function App() {
         )
       );
     } else {
-      setCartDisplay((prevItems) => [...prevItems, {title, description, price, id, count: Number(quantity)}]);
+      setCartDisplay((prevItems) => [...prevItems, {title, description, price, image, id, count: Number(quantity)}]);
     }
   
     return;
@@ -45,7 +47,7 @@ function App() {
     console.error(error)
   } },[])
 
-console.log(products)
+
   useEffect(() => {
     function calcTotal() {
       setTotal(prevState => {
@@ -59,6 +61,19 @@ console.log(products)
     calcTotal();
   },[cartDisplay])
 
+  
+  useEffect(() => {
+    function countCartItems() {
+      setCartCount(prevState => {
+        let cartItems = 0;
+        for (let item of cartDisplay) {
+          cartItems += item.count;
+        }
+        return cartItems;
+      });
+    }
+    countCartItems();
+  },[cartDisplay])
 
 
 
@@ -66,7 +81,7 @@ console.log(products)
         
    return (
     <div>
-   <NavBar/>
+   <NavBar cartCount={cartCount}/>
 
   
   <Routes>

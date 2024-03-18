@@ -13,6 +13,7 @@ function HomePage ({ productItems, addToCart }) {
 				 title = {item.title}
 				 description = {item.description}
 				 price = {item.price}
+				 image = {item.image}
 				 addToCart={addToCart}
 			/>
 		
