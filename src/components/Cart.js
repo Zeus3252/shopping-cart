@@ -33,3 +33,4 @@ function CartRender({ cartItems, removeFromCart, totalPrice, image }) {
 }
 
 export default CartRender;
+npm install gh-pages
