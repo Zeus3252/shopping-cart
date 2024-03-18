@@ -1,39 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import ProductDisplay from './components/Product';
-import CartRender from './components/Cart';
+import HomePage from './components/HomePage';
+import CartRender from "./components/Cart"
+import { Routes, Route } from "react-router-dom";
+import NavBar from './components/NavBar';
 
 function App() {
   const [products, setProducts] = useState([]);
   const [cartDisplay, setCartDisplay] = useState([]);
   const [total, setTotal] = useState(0);
 
- 
-
-  useEffect(() => {
-
-    function calcTotal() {
-      setTotal(prevState => {
-        let totalPrice = 0;
-        for (let item of cartDisplay) {
-          totalPrice += item.price * item.count;
-        }
-        return totalPrice;
-      });
-    }
-    
-
-    calcTotal();
-  },[cartDisplay])
-
   const removeFromCart = (id) => {
-    setCartDisplay((prevState) => prevState.filter((item) => item.id !== id));
-    
-      
- };
+    setCartDisplay((prevState) => prevState.filter((item) => item.id !== id));    
+  };
   
-
-
   const addToCart = (quantity, id, title, description, price) => {
     
     if (cartDisplay.find((item) => item.id === id) !== undefined) {
@@ -45,54 +24,64 @@ function App() {
     } else {
       setCartDisplay((prevItems) => [...prevItems, {title, description, price, id, count: Number(quantity)}]);
     }
-
+  
     return;
   };
+  
 
-    useEffect(function fetchProducts() {
-        axios.get('https://fakestoreapi.com/products')
-      .then(response => {
-        setProducts(response.data)
-      })
-      .catch(error => {
-        console.error('Error fetching products:', error);
+
+ useEffect(() => {
+  try {
+    const getData = async () => {
+
+      const response = await fetch("https://fakestoreapi.com/products")
+      const result = await response.json()
+      console.log('running', result)
+      setProducts(result)
+  }
+      getData();
+ 
+    } catch (error) {
+    console.error(error)
+  } },[])
+
+console.log(products)
+  useEffect(() => {
+    function calcTotal() {
+      setTotal(prevState => {
+        let totalPrice = 0;
+        for (let item of cartDisplay) {
+          totalPrice += item.price * item.count;
+        }
+        return totalPrice;
       });
-  }, []);
-           
-   return (<div>
-    <ul>
-    <h3>Total: ${total}</h3>
-       <h3>CART</h3>
-       
-       {cartDisplay.map((item) => (
-            <CartRender 
-               removeFromCart = {removeFromCart}
-               key = {item.id}
-               title = {item.title}
-               description = {item.description}
-               price = {item.price}
-               count = {item.count}
-               id = {item.id}
-              
-            />
-            ))}
-      </ul>   
-        <ul>
-          <h3>ITEMS</h3>
-          {products.map((item) => (
-            
-            <ProductDisplay 
-               key = {item.id}
-               id = {item.id}
-               title = {item.title}
-               description = {item.description}
-               price = {item.price}
-               addToCart={addToCart}
-            />
-          
-          ))}      
-      </ul>
-</div>
+    }
+    calcTotal();
+  },[cartDisplay])
+
+
+
+
+
+        
+   return (
+    <div>
+   <NavBar/>
+
+  
+  <Routes>
+    <Route path="/" element={<HomePage
+     productItems={products}
+     addToCart={addToCart}
+    />} />
+    <Route path="/cart" element={<CartRender 
+     cartItems={cartDisplay}
+     removeFromCart={removeFromCart}
+     totalPrice={total}
+    />} />
+  </Routes>
+     
+   </div>
 );
   
 }
