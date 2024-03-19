@@ -3,7 +3,7 @@ import App from "../App";
 
 const RouterConfig = () => {
   return (
-    <Router>
+    <Router basename="/shopping-cart">
       <App />
     </Router>
   );
