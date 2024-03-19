@@ -1,13 +1,8 @@
-function CartDisplay({
-  cartDisplay,
-  removeFromCart,
-  totalPrice,
-  addToCart,
-}) {
+function CartDisplay({ cartDisplay, removeFromCart, totalPrice, addToCart }) {
   return (
     <>
       <ul className="text-center font-bold text-xl mb-4">
-        <h3>Total: ${totalPrice}</h3>
+        <h3>Total: $Number({totalPrice})</h3>
         <h3>CART</h3>
       </ul>
       <div className="max-w-4xl mx-auto">

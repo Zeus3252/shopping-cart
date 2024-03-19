@@ -19,7 +19,7 @@ function App() {
     if (cartDisplay.find((item) => item.id === id) !== undefined) {
       setCartDisplay((prevState) =>
         prevState.map((item) =>
-          item.id === id ? { ...item, count: quantity } : item
+          item.id === id ? { ...item, count: Number(quantity) } : item
         )
       );
     } else {
@@ -61,18 +61,18 @@ function App() {
   useEffect(() => {
     function countCartItems() {
       setCartCount((prevState) => {
-        let cartDisplay = 0;
+        let cartTemp = 0;
         for (let item of cartDisplay) {
-          cartDisplay += item.count;
+          cartTemp += item.count;
         }
-        return cartDisplay;
+        return cartTemp;
       });
     }
     countCartItems();
   }, [cartDisplay]);
 
   return (
-    <div class="bg-[url('https://img.freepik.com/free-vector/white-background-with-hexagonal-line-pattern-design_1017-28442.jpg?w=1380&t=st=1710821100~exp=1710821700~hmac=8ecc68cab877b706a98c984fea5ade2e6d01aa04e6c66708c2ebbf0ff325f7b9')] min-h-screen min-w-full bg-cover bg-no-repeat">
+    <div class="bg-gray-200 min-h-screen min-w-full bg-cover bg-no-repeat">
       <NavBar cartCount={cartCount} />
 
       <Routes>
