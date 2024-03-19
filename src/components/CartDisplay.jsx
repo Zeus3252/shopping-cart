@@ -2,8 +2,15 @@ function CartDisplay({ cartDisplay, removeFromCart, totalPrice, addToCart }) {
   return (
     <>
       <ul className="text-center font-bold text-xl mb-4">
-        <h3>Total: $Number({totalPrice})</h3>
         <h3>CART</h3>
+
+        <h3 className="text-green-500">
+          Total:&nbsp;
+          {new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "USD",
+          }).format(totalPrice)}
+        </h3>
       </ul>
       <div className="max-w-4xl mx-auto">
         <div className="flex flex-col space-y-4">
