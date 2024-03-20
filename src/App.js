@@ -36,7 +36,7 @@ function App() {
     try {
       const getData = async () => {
         const response = await fetch("https://fakestoreapi.com/products");
-        const result = await response.json();
+        var result = await response.json();
         setProducts(result);
       };
       getData();
@@ -73,7 +73,11 @@ function App() {
 
   return (
     <div class="bg-gray-200 min-h-screen min-w-full bg-cover bg-no-repeat">
-      <NavBar cartCount={cartCount} />
+      <NavBar
+        cartCount={cartCount}
+        setProducts={setProducts}
+        products={products}
+      />
 
       <Routes>
         <Route
