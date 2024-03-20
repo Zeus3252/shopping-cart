@@ -27,7 +27,7 @@ function CartDisplay({ cartDisplay, removeFromCart, totalPrice, addToCart }) {
                     style={{ height: "250px" }}
                   >
                     <img
-                      className="object-contain h-full"
+                      className="objenct-contain h-full"
                       src={item.image}
                       alt={item.title}
                     />
