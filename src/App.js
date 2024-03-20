@@ -36,7 +36,7 @@ function App() {
     try {
       const getData = async () => {
         const response = await fetch("https://fakestoreapi.com/products");
-        var result = await response.json();
+        const result = await response.json();
         setProducts(result);
       };
       getData();

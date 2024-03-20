@@ -8,7 +8,7 @@ function NavBar({ cartCount, products, setProducts }) {
     const getData = async () => {
       try {
         const response = await fetch("https://fakestoreapi.com/products");
-        var result = await response.json();
+        const result = await response.json();
         let filteredProducts = result.filter((product) =>
           product.title.toLowerCase().includes(searchString.toLowerCase())
         );
