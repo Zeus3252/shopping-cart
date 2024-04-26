@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useContext } from "react";
+import AppContext from "../context/AppContext";
 
-function NavBar({ cartCount, products, setProducts }) {
-  const [searchString, setSearchString] = useState("");
+function NavBar() {
+  const { searchString, setSearchString, cartCount, setProducts } =
+    useContext(AppContext);
 
   useEffect(() => {
     const getData = async () => {

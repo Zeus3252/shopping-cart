@@ -1,36 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import HomePage from "./components/HomePage";
 import CartDisplay from "./components/CartDisplay";
 import { Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import "./tailwind.css";
+import AppContext from "./context/AppContext";
 
 function App() {
-  const [products, setProducts] = useState([]);
-  const [cartDisplay, setCartDisplay] = useState([]);
-  const [total, setTotal] = useState(null);
-  const [cartCount, setCartCount] = useState(null);
-
-  const removeFromCart = (id) => {
-    setCartDisplay((prevState) => prevState.filter((item) => item.id !== id));
-  };
-
-  const addToCart = (quantity, id, title, description, price, image) => {
-    if (cartDisplay.find((item) => item.id === id) !== undefined) {
-      setCartDisplay((prevState) =>
-        prevState.map((item) =>
-          item.id === id ? { ...item, count: Number(quantity) } : item
-        )
-      );
-    } else {
-      setCartDisplay((prevItems) => [
-        ...prevItems,
-        { title, description, price, image, id, count: Number(quantity) },
-      ]);
-    }
-
-    return;
-  };
+  const { cartDisplay, setProducts, setTotal, setCartCount } =
+    useContext(AppContext);
 
   useEffect(() => {
     try {
@@ -73,28 +51,11 @@ function App() {
 
   return (
     <div class="bg-gray-200 min-h-screen min-w-full bg-cover bg-no-repeat">
-      <NavBar
-        cartCount={cartCount}
-        setProducts={setProducts}
-        products={products}
-      />
+      <NavBar />
 
       <Routes>
-        <Route
-          path="/"
-          element={<HomePage productItems={products} addToCart={addToCart} />}
-        />
-        <Route
-          path="/cart"
-          element={
-            <CartDisplay
-              cartDisplay={cartDisplay}
-              removeFromCart={removeFromCart}
-              totalPrice={total}
-              addToCart={addToCart}
-            />
-          }
-        />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/cart" element={<CartDisplay />} />
       </Routes>
     </div>
   );

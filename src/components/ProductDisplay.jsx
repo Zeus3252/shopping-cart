@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 function ProductDisplay({ title, description, price, addToCart, id, image }) {
   const [quantity, setQuantity] = useState(null);

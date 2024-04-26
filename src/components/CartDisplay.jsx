@@ -1,4 +1,10 @@
-function CartDisplay({ cartDisplay, removeFromCart, totalPrice, addToCart }) {
+import AppContext from "../context/AppContext";
+import React, { useContext } from "react";
+
+function CartDisplay() {
+  const { removeFromCart, addToCart, total, cartDisplay } =
+    useContext(AppContext);
+
   return (
     <>
       <ul className="text-center font-bold text-xl mb-4">
@@ -9,7 +15,7 @@ function CartDisplay({ cartDisplay, removeFromCart, totalPrice, addToCart }) {
           {new Intl.NumberFormat("en-US", {
             style: "currency",
             currency: "USD",
-          }).format(totalPrice)}
+          }).format(total)}
         </h3>
       </ul>
       <div className="max-w-4xl mx-auto">

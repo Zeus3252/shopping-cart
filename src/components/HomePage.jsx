@@ -1,6 +1,9 @@
 import ProductDisplay from "./ProductDisplay";
+import AppContext from "../context/AppContext";
+import React, { useContext } from "react";
 
-function HomePage({ productItems, addToCart }) {
+function HomePage() {
+  const { products, addToCart } = useContext(AppContext);
   return (
     <div>
       <br />
@@ -10,8 +13,8 @@ function HomePage({ productItems, addToCart }) {
       <br />
       <br />
       <div className="productsDisplay">
-        {productItems &&
-          productItems.map((item) => (
+        {products &&
+          products.map((item) => (
             <ProductDisplay
               key={item.id}
               id={item.id}
